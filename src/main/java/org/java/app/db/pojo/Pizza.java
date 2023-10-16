@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.java.app.api.dto.PizzaDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,9 +47,11 @@ public class Pizza {
     private BigDecimal prezzo;
     
     @OneToMany(mappedBy="pizza")
+    @JsonManagedReference
 	private List<SpecialOffer> offerteSpeciali;
     
     @ManyToMany
+    @JsonManagedReference
 	private List<Ingredient> ingredients;
 	
     public Pizza() { }
@@ -57,6 +63,14 @@ public class Pizza {
     	setPrezzo(prezzo);
     	setIngredients(Arrays.asList(ingredients));
     }
+    
+    public Pizza(PizzaDTO pizzaDto) {
+
+    	 setNome(pizzaDto.getNome());
+    	 setDescrizione(pizzaDto.getDescrizione());
+    	 setFoto(pizzaDto.getFoto());
+    	 setPrezzo(pizzaDto.getPrezzo());
+	}
 	
 	public int getId() {
 		return id;
@@ -116,6 +130,14 @@ public class Pizza {
 	public void removeIngredient(Ingredient ingredient) {
 
 		getIngredients().remove(ingredient);
+	}
+	
+	public void fillFromPizzaDto(PizzaDTO pizzaDto) {
+
+		setNome(pizzaDto.getNome());
+	   	setDescrizione(pizzaDto.getDescrizione());
+	   	setFoto(pizzaDto.getFoto());
+	   	setPrezzo(pizzaDto.getPrezzo());
 	}
 	
 	@Override

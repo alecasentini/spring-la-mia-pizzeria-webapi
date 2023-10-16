@@ -59,7 +59,7 @@ public class PizzaController {
 	
 	@GetMapping("/{id}")
 	public String getPizzaDetails(@PathVariable int id, Model model) {
-	    Pizza pizza = pizzaService.findById(id);
+	    Pizza pizza = pizzaService.findById(id).get();
 	    model.addAttribute("pizza", pizza);
 	    return "pizza-show";
 	}
@@ -84,7 +84,7 @@ public class PizzaController {
 	@GetMapping("/{id}/edit")
 	public String getEditPizzaForm(@PathVariable int id, Model model) {
 		List<Ingredient> ingredients = ingredientService.findAll();
-		Pizza pizza = pizzaService.findById(id);
+		Pizza pizza = pizzaService.findById(id).get();
 	    model.addAttribute("pizza", pizza);
 	    model.addAttribute("ingredients", ingredients);
 	    return "pizza-edit"; 
@@ -115,7 +115,7 @@ public class PizzaController {
 	 
 	 @GetMapping("/{pizzaId}/special-offer/create")
 	 public String showCreateSpecialOfferForm(@PathVariable int pizzaId, Model model) {
-	     Pizza pizza = pizzaService.findById(pizzaId);
+	     Pizza pizza = pizzaService.findById(pizzaId).get();
 	     model.addAttribute("pizza", pizza);
 	     model.addAttribute("specialOffer", new SpecialOffer());
 	     return "special-offer-create";
@@ -125,11 +125,11 @@ public class PizzaController {
 	 @PostMapping("/{pizzaId}/special-offer/create")
 	 public String createSpecialOffer(@PathVariable int pizzaId, @Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult, Model model) {
 	     if (bindingResult.hasErrors()) {
-	         Pizza pizza = pizzaService.findById(pizzaId);
+	         Pizza pizza = pizzaService.findById(pizzaId).get();
 	         model.addAttribute("pizza", pizza);
 	         return "special-offer-create";
 	     }
-	     Pizza pizza = pizzaService.findById(pizzaId);
+	     Pizza pizza = pizzaService.findById(pizzaId).get();
 	     specialOffer.setPizza(pizza);
 	     specialOfferService.createSpecialOffer(specialOffer);
 	     return "redirect:/pizzas/" + pizzaId;
@@ -137,7 +137,7 @@ public class PizzaController {
 
 	 @GetMapping("/{pizzaId}/special-offer/{offerId}/edit")
 	 public String showEditSpecialOfferForm(@PathVariable int pizzaId, @PathVariable int offerId, Model model) {
-	     Pizza pizza = pizzaService.findById(pizzaId);
+	     Pizza pizza = pizzaService.findById(pizzaId).get();
 	     SpecialOffer specialOffer = specialOfferService.getSpecialOfferById(offerId);
 	     model.addAttribute("pizza", pizza);
 	     model.addAttribute("specialOffer", specialOffer);
@@ -147,11 +147,11 @@ public class PizzaController {
 	 @PostMapping("/{pizzaId}/special-offer/{offerId}/edit")
 	 public String editSpecialOffer(@PathVariable int pizzaId, @PathVariable int offerId, @Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult, Model model) {
 	     if (bindingResult.hasErrors()) {
-	         Pizza pizza = pizzaService.findById(pizzaId);
+	         Pizza pizza = pizzaService.findById(pizzaId).get();
 	         model.addAttribute("pizza", pizza);
 	         return "special-offer-edit";
 	     }
-	     Pizza pizza = pizzaService.findById(pizzaId);
+	     Pizza pizza = pizzaService.findById(pizzaId).get();
 	     specialOffer.setPizza(pizza);
 	     specialOffer.setId(offerId);
 	     specialOfferService.updateSpecialOffer(specialOffer);

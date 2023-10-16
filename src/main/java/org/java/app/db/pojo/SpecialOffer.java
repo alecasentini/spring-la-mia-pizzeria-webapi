@@ -2,6 +2,7 @@ package org.java.app.db.pojo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -32,6 +33,7 @@ public class SpecialOffer {
     
     @ManyToOne
     @JoinColumn(name="pizza_id", nullable=false)
+    @JsonBackReference
     private Pizza pizza;
     
     public int getId() {
