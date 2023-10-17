@@ -39,6 +39,17 @@ function editPizza(id) {
 function createPizza() {
   router.push({ name: 'PizzaCreate' });
 }
+
+function deletePizza(id) {
+  axios.delete(API_URL + '/' + id)
+    .then(res => {
+      console.log(res.data);
+      alert('Pizza eliminata con successo!');
+      getAllPizzas();
+    })
+    .catch(err => console.log(err));
+}
+
 </script>
 
 <template>

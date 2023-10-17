@@ -1,9 +1,10 @@
 <script setup>
-import HomeView from './views/HomeView.vue';
-import PizzaShow from './views/PizzaShow.vue';
+import NavbarComp from './components/NavbarComp.Vue';
+
 </script>
 
 <template>
+  <NavbarComp />
   <router-view />
 </template>
 
