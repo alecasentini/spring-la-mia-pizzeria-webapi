@@ -31,6 +31,10 @@ const filteredPizzas = computed(() => {
 function showDetails(id) {
   router.push({ name: 'PizzaShow', params: { id } });
 }
+
+function editPizza(id) {
+  router.push({ name: 'PizzaEdit', params: { id } });
+}
 </script>
 
 <template>

@@ -31,7 +31,7 @@ function getPizzaDetails() {
             <div class="card-body py-3">
                 <p class="card-text py-3 mb-0"><strong>Descrizione:</strong> {{ pizza.descrizione }}</p>
                 <p class="card-text py-3">
-                    <strong>Ingredienti:</strong>
+                    <strong>Ingredienti: </strong>
                     <span v-for="(ingredient, index) in pizza.ingredients" :key="index">{{ ingredient.name }}<span
                             v-if="index !== pizza.ingredients.length - 1">, </span></span>
                 </p>
@@ -42,7 +42,7 @@ function getPizzaDetails() {
                         {{ pizza.prezzo - (pizza.prezzo * pizza.offerteSpeciali[0].scontoPercentuale / 100) }}
                     </span>
                     <span v-else>
-                        Prezzo: {{ pizza.prezzo }}
+                        <strong>Prezzo: </strong> {{ pizza.prezzo }}
                     </span><span>€</span>
                 </p>
 
