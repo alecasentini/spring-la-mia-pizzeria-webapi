@@ -1,10 +1,11 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from "axios";
 const API_URL = "http://localhost:8080/api/v1.0"
 
 const pizze = ref(null);
-const searchQuery = ref('');
+const router = useRouter();
 
 function getAllPizzas() {
   axios.get(API_URL)
@@ -18,12 +19,18 @@ onMounted(() => {
   getAllPizzas();
 });
 
+const searchQuery = ref('');
+
 const filteredPizzas = computed(() => {
   if (!searchQuery.value) {
     return pizze.value;
   }
   return pizze.value.filter(pizza => pizza.nome.toLowerCase().includes(searchQuery.value.toLowerCase()));
 });
+
+function showDetails(id) {
+  router.push({ name: 'PizzaShow', params: { id } });
+}
 </script>
 
 <template>

@@ -1,9 +1,10 @@
 <script setup>
 import HomeView from './views/HomeView.vue';
+import PizzaShow from './views/PizzaShow.vue';
 </script>
 
 <template>
-  <HomeView />
+  <router-view />
 </template>
 
 <style lang="scss">
