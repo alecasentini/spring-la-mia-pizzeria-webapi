@@ -35,6 +35,10 @@ function showDetails(id) {
 function editPizza(id) {
   router.push({ name: 'PizzaEdit', params: { id } });
 }
+
+function createPizza() {
+  router.push({ name: 'PizzaCreate' });
+}
 </script>
 
 <template>
@@ -42,6 +46,7 @@ function editPizza(id) {
     <div class="container">
 
       <h1>Pizze</h1>
+      <button @click="createPizza" class="btn btn-primary">Crea Nuova Pizza</button>
       <div class="py-3">
         <form @submit.prevent>
           <div class="w-50">
